@@ -1,7 +1,7 @@
 package main
 
 import (
-	"cmd/cli"
+	"github.com/Cr"
 	"github.com/spf13/cobra"
 )
 
