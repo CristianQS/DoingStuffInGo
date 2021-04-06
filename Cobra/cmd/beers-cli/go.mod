@@ -1,0 +1,1 @@
+module "beers-cli"
