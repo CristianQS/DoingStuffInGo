@@ -1,4 +1,4 @@
-module cli
+module commands
 
 go 1.16
 

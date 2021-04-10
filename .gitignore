@@ -1,1 +1,23 @@
 ej*
+.idea
+*.dll
+*.dylib
+*.exe
+*.exe~
+*.so
+
+# Testing
+*.test
+*.tmp
+
+
+
+
+
+
+
+
+
+
+
+
