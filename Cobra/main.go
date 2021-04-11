@@ -1,12 +1,13 @@
 package main
 
 import (
-	"github.com/CristianQS/DoingStuffInGo/Cobra/commands"
+	"Cobra/commands"
 	"github.com/spf13/cobra"
 )
 
 func main() {
-	rootCmd := &cobra.Command{Use: "beers-cli"}
+	rootCmd := &cobra.Command{Use: "commands"}
 	rootCmd.AddCommand(commands.InitBeersCmd())
+	rootCmd.AddCommand(commands.InitStoreCmd())
 	rootCmd.Execute()
 }
