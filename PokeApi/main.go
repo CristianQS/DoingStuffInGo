@@ -1,6 +1,7 @@
 package main
 
 import (
+	"PokeApi/domain"
 	"encoding/csv"
 	"encoding/json"
 	"fmt"
@@ -15,7 +16,7 @@ func main() {
  	client := &http.Client{
  		Timeout: 10 * time.Second,
 	}
-	var locations Location
+	var locations domain.Location
 	req,_ := http.NewRequest("GET","https://pokeapi.co/api/v2/location/canalave-city",nil)
 	resp,_ := client.Do(req)
 	body, _ := ioutil.ReadAll(resp.Body)
@@ -27,7 +28,6 @@ func main() {
 	}
 	defer  csvFile.Close()
 
-	fmt.Println(locations)
 	writer := csv.NewWriter(csvFile)
 
 	var row []string
@@ -54,43 +54,3 @@ func main() {
 	// remember to flush!
 	writer.Flush()
 }
-
-type Location struct {
-	Id int `json:"ìd"`
-	Name string `json:"name"`
-	Region Region `json:"region"`
-	Names [] Name `json:"names"`
-	Games [] Game `json:"game_indices"`
-	Areas [] Area `json:"areas"`
-}
-
-type Region struct {
-	Name string `json:"name"`
-	Url  string `json:"url"`
-}
-
-type Name struct {
-	Name string `json:"name"`
-	Language Language `json:"language"`
-}
-
-type Language struct {
-	Name string `json:"name"`
-	Url string `json:"url"`
-}
-
-type Game struct {
-	Id int `json:"game_index"`
-	Generation Generation `json:"generation"`
-}
-
-type Generation struct {
-	Name string `json:"name"`
-	Url string `json:"url"`
-}
-
-type Area struct {
-	Name string `json:"name"`
-	Url string `json:"url"`
-}
-
