@@ -17,12 +17,11 @@ func main() {
  		Timeout: 10 * time.Second,
 	}
 	var locations domain.Location
-	GetLocation(client, locations)
-
-	CreateCsvFrom(locations)
+	GetLocation(client, &locations)
+	CreateCsvFrom(&locations)
 }
 
-func CreateCsvFrom(locations domain.Location) {
+func CreateCsvFrom(locations *domain.Location) {
 	csvFile, err := os.Create("locations.csv")
 	if err != nil {
 		fmt.Println(err)
@@ -35,14 +34,14 @@ func CreateCsvFrom(locations domain.Location) {
 }
 
 
-func GetLocation(client *http.Client, locations domain.Location) {
+func GetLocation(client *http.Client, locations *domain.Location) {
 	req, _ := http.NewRequest("GET", "https://pokeapi.co/api/v2/location/canalave-city", nil)
 	resp, _ := client.Do(req)
 	body, _ := ioutil.ReadAll(resp.Body)
 	_ = json.Unmarshal(body, &locations)
 }
 
-func SerializeLocation(locations domain.Location) (row [] string) {
+func SerializeLocation(locations *domain.Location) (row []string) {
 	row = append(row, strconv.Itoa(locations.Id))
 	row = append(row, locations.Name)
 	row = SerializeRegion(locations.Region, row)
